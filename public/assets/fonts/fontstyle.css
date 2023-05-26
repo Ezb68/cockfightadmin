@@ -1,0 +1,30 @@
+/*@font-face {*/
+/*    font-family: 'LuckiestGuy';*/
+/*    src: url('Brandon/LuckiestGuy-reg.ttf') format('truetype');*/
+/*}*/
+@font-face {
+    font-family: 'Display';
+    src: url('sfpro/Pro-display.otf') format('opentype');
+}
+@font-face {
+    font-family: 'SheBiao';
+    src: url('sfpro/SheBiao.ttf') format('truetype');
+}
+/*@font-face {*/
+/*    font-family: 'HelveticaNeue';*/
+/*    src: url('HelveticaNeue/HelveticaNeue.eot?#iefix') format('embedded-opentype'),*/
+/*    url('HelveticaNeue/HelveticaNeue.otf') format('opentype'),*/
+/*    url('HelveticaNeue/HelveticaNeue.woff') format('woff'),*/
+/*    url('HelveticaNeue/HelveticaNeue.ttf') format('truetype'),*/
+/*    url('HelveticaNeue/HelveticaNeue.svg#HelveticaNeue') format('svg');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*}*/
+html, body {
+    font-family: 'Display';
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    font-family: 'Display';
+}
