@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router"
+import {useStoreState} from "@/store/account";
 
-export default function TagLink() {
+export default function Menu() {
     const router = useRouter();
-
+    const user = useStoreState('detail');
+    const info = useStoreState('info');
+    const statistics = useStoreState('statistics');
+    
     return(
         <>
             <div className="tag-block d-none d-lg-block">
@@ -11,16 +15,17 @@ export default function TagLink() {
                     <div className="container">
                         <div className="d-flex">
                             <div className="tag-item me-3">
-                                <div className="icon me-2 text-highline"><i className="fas fa-user-circle"></i></div>sonicmap
+                                <div className="icon me-2 text-highline"><i className="fas fa-user-circle"></i></div>
+                                {user?.name}
                             </div>
                             <div className="tag-item me-3">
-                                <div className="icon me-1 text-danger"><i className="far fa-list-alt"></i></div><span className="text-danger me-3">DEBIT:</span>100.000
+                                <div className="icon me-1 text-danger"><i className="far fa-list-alt"></i></div><span className="text-danger me-3">DEBIT:</span>0
                             </div>
                             <div className="tag-item me-3">
-                                <div className="icon me-2 text-highline"><i className="fas fa-coins"></i></div><span className="text-highline me-3">CREDIT:</span>100.000
+                                <div className="icon me-2 text-highline"><i className="fas fa-coins"></i></div><span className="text-highline me-3">CREDIT:</span>0
                             </div>
                             <div className="tag-item me-3">
-                                <div className="icon me-2 text-tag"><i className="fas fa-chart-line"></i></div><span className="text-tag me-3">PROFIT:</span>100.000
+                                <div className="icon me-2 text-tag"><i className="fas fa-chart-line"></i></div><span className="text-tag me-3">PROFIT:</span>0
                             </div>
                         </div>
                     </div>

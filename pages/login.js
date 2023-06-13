@@ -1,24 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../public/assets/images/logo.png';
 import { useRouter } from 'next/router';
-import * as axios from '../helpers/axios';
+import axios from '../utills/axios';
+import {dispatch, useStoreState} from '@/store/account'
+import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
+import {useNotify} from "@/utills/useNotify";
 
 export default function Login({Component, pageProps}) {
     const router = useRouter();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    
+    const user = useStoreState('detail');
 
     async function login() {
-        await axios.callApi('POST', '/api/auth/v1/login', {
+        await axios.callApi('POST','auth/v1/login',{
             username,
             password
-        })
-        .then(res => {
-            router.push('/');
+        }).then(async res => {
+            let { data, code, message } = res;
+            if(code === 0) {
+                await axios.setToken(data.token);
+                setCookie('accessToken', data.token)
+                setCookie('refreshToken', data.refreshToken)
+                dispatch({ type: 'SET_USER_LOGIN'})
+                await router.push('/');
+            };
+        }).catch(e => {
+            useNotify('error', e.message)
         })
     }
-
+    
     return (
         <>
             <div className="container">
