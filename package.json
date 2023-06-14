@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start -p 8080",
+    "start": "next build && next start -p 8888",
     "lint": "next lint",
     "deploy": "sh install-production.bash",
     "deploy-test": "sh install-test.bash"
@@ -21,15 +21,12 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
-    "cookies": "^0.8.0",
     "cookies-next": "^2.1.2",
     "currency-formatter": "^1.5.9",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
-    "exceljs": "^4.3.0",
     "file-saver": "^2.0.5",
     "jquery": "^3.6.4",
-    "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
     "next": "13.2.4",
     "notiflix": "^3.2.6",
@@ -42,8 +39,7 @@
     "sass": "^1.62.0",
     "scss": "^0.2.4",
     "sweetalert2": "^11.7.12",
-    "wowjs": "^1.1.3",
-    "xml2js": "^0.6.0"
+    "wowjs": "^1.1.3"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

@@ -6,16 +6,14 @@ import logo from '../public/assets/images/logo.png'
 export default function MenuMobile() {
     const router = useRouter();
     const user = useStoreState('detail');
-    const info = useStoreState('info');
-    const statistics = useStoreState('statistics');
-    
+
     return(
         <>
             <div className="offcanvas offcanvas-start" id="offcanvasExample"
                  aria-labelledby="offcanvasExampleLabel">
                 <div className="offcanvas-header">
                     <h5 className="offcanvas-title">
-                        <img src={logo.src} style={{width: '70px'}}/>
+                        <img src={logo.src} style={{width: '70px'}} alt=""/>
                     </h5>
                     <button className="btn border-0 p-0" type="button" data-bs-dismiss="offcanvas"
                             aria-label="Close"><i className="fas fa-times text-highline fa-2x"></i></button>

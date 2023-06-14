@@ -4,10 +4,9 @@ import {useStoreState} from "@/store/account";
 import moment from "moment";
 import {useNotify} from "@/utills/useNotify";
 import {useSweetAlert} from "@/utills/useSweetAlert2";
-import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { parseString } from 'xml2js';
-import {getCookie} from "cookies-next";
+import {faCaretLeft, faCaretRight, faLock, faUnlock, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Tree({Component, pageProps}) {
@@ -130,13 +129,13 @@ export default function Tree({Component, pageProps}) {
                                             <td>{user.username}</td>
                                             <td>
                                                 {
-                                                    user.status === 'ACTIVE' ? (
-                                                        <div className="btn btn-success">{user.status}</div>) : (
-                                                        <div className="btn btn-danger">{user.status}</div>)
+                                                    user.status === 'LOCK' ? (
+                                                        <div className="btn btn-danger">{user.status}</div>) : (
+                                                        <div className="btn btn-success">{user.status}</div>)
                                                 }
                                             </td>
                                             <td>
-                                                <div className="btn btn-success">View</div>
+                                                <div className="btn btn-danger">View</div>
                                             </td>
                                             <td>{user.currency}</td>
                                             <td>{user.walletType}</td>
@@ -145,10 +144,10 @@ export default function Tree({Component, pageProps}) {
                                             <td>
                                                 {
                                                     user.status === 'LOCK' ? (
-                                                        <i className="fa-solid fa-lock text-warning" ></i>
+                                                        <FontAwesomeIcon className="text-warning" icon={faLock}/>
                                                     ) : (
                                                         <button className="btn" onClick={() => showModal({message: user.password})}>
-                                                            <i className="fa-solid fa-unlock text-success" ></i>
+                                                            <FontAwesomeIcon className="text-success" icon={faUnlock}/>
                                                         </button>
                                                     )
                                                 }
@@ -170,16 +169,14 @@ export default function Tree({Component, pageProps}) {
                         <div className="btn-group mx-auto" role="group" aria-label="First group">
                             {
                                 page > 1 && page <= users?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}><i
-                                        className="fas fa-caret-left"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}><FontAwesomeIcon className="" icon={faCaretLeft}/></button>
                                 ) : ''
                             }
                             
                             <button className="btn btn-danger" type="button">{page}</button>
                             {
                                 page >= 1 && page < users?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}><i
-                                        className="fas fa-caret-right"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}><FontAwesomeIcon className="" icon={faCaretRight}/></button>
                                 ) : ''
                             }
                             

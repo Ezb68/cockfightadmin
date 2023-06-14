@@ -20,10 +20,11 @@ import { CookiesProvider } from 'react-cookie';
 
 // Tell Font Awesome to skip adding the CSS automatically
 // since it's already imported above
-config.autoAddCss = false;
+config.autoAddCss = true;
 
 export default function App({ Component, pageProps }) {
     useEffect(() => {
+    
         if (typeof document !== undefined) {
             //import js file
             require('@/public/assets/js/all.min.js')

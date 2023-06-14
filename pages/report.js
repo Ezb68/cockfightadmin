@@ -5,6 +5,8 @@ import moment from "moment/moment";
 import {useStoreState} from "@/store/account";
 import {money} from "@/utills/filters";
 import {useNotify} from "@/utills/useNotify";
+import {faCaretLeft, faCaretRight, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Report({ Component, pageProps }) {
     const [startDate, setStartDate] = useState(new Date());
@@ -177,16 +179,19 @@ export default function Report({ Component, pageProps }) {
                         <div className="btn-group mx-auto" role="group" aria-label="First group">
                             {
                                 page > 1 && page <= reports?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}><i
-                                        className="fas fa-caret-left"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}>
+                                        <FontAwesomeIcon className="" icon={faCaretLeft}/>
+                                    </button>
                                 ) : ''
                             }
             
                             <button className="btn btn-danger" type="button">{page}</button>
                             {
                                 page >= 1 && page < reports?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}><i
-                                        className="fas fa-caret-right"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}>
+                                        
+                                        <FontAwesomeIcon className="" icon={faCaretRight}/>
+                                    </button>
                                 ) : ''
                             }
         

@@ -5,7 +5,6 @@ import MenuMobile from "../MenuMobile";
 
 import { useEffect } from 'react';
 import { useRouter } from "next/router";
-import { useCookies } from 'react-cookie';
 import {dispatch} from "@/store/account";
 import {getCookie} from "cookies-next";
 

@@ -1,38 +1,8 @@
 import React from 'react';
-import { createStore } from 'react-hooks-global-state';
+import {createStore} from 'react-hooks-global-state';
 import moment from "moment";
-import { setCookie, getCookie, hasCookie, deleteCookie } from 'cookies-next';
+import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'GET_INFO_USER': return { ...state };
-        case 'SET_USER_LOGIN': {
-            const token = getCookie('accessToken')
-            if (!token) {
-                return null
-            }
-            const data = JSON.parse(atob(token.split('.')[1]))
-            if (moment().utc().unix() >= data.exp) {
-                localStorage.clear()
-                sessionStorage.clear()
-                deleteCookie('accessToken')
-                return null
-            }
-            state.detail = data
-            break
-        };
-        case 'REMOVE_USER_LOGIN': {
-            deleteCookie('accessToken')
-            state.detail = {}
-            break;
-        };
-        case 'SET_USER_INFO': {
-            state.info = action.data
-            break
-        };
-        default: return state;
-    }
-};
 const initialState = {
     detail: {
         given_name: '',
@@ -65,6 +35,45 @@ const initialState = {
         ]
     }
 };
-export const { dispatch, useStoreState } = createStore(reducer, initialState);
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'GET_INFO_USER':
+            return {...state};
+        case 'SET_USER_LOGIN': {
+            const token = getCookie('accessToken')
+            if (!token) {
+                return null
+            }
+            const data = JSON.parse(atob(token.split('.')[1]))
+            if (moment().utc().unix() >= data.exp) {
+                localStorage.clear()
+                sessionStorage.clear()
+                deleteCookie('accessToken')
+                return null
+            }
+            state.detail = data
+            break
+        }
+            ;
+        case 'REMOVE_USER_LOGIN': {
+            deleteCookie('accessToken')
+            deleteCookie('refreshToken')
+            localStorage.clear()
+            sessionStorage.clear()
+            state = initialState
+            break;
+        }
+            ;
+        case 'SET_USER_INFO': {
+            state.info = action.data
+            break
+        }
+            ;
+        default:
+            return state;
+    }
+};
+
+export const {dispatch, useStoreState} = createStore(reducer, initialState);
 
 //https://www.npmjs.com/package/react-hooks-global-state

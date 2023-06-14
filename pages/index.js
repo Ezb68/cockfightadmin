@@ -7,26 +7,26 @@ import {dispatch, useStoreState} from "@/store/account";
 import {setCookie, getCookie, hasCookie, deleteCookie} from 'cookies-next';
 import moment from "moment";
 import {useNotify} from "@/utills/useNotify";
+import {faCheck, faCheckCircle, faGear, faLock, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Home({Component, pageProps}) {
     const info = useStoreState('info');
     const user = useStoreState('detail');
-    
-    const [dailyReport, setDailyReport] = useState({})
+
     async function getInfo() {
-        await axios.callApi('GET', 'admin/v1/info')
-        .then(res => {
+        await axios.callApi('GET', 'admin/v1/info').then(res => {
             let { code, data, message } = res
             if(code === 0) {
                 dispatch({type: 'SET_USER_INFO', data: data})
             }
-        })
-        .catch(e => {
+        }).catch(e => {
             useNotify('error', e.message)
         })
-    };
+    }
 
     useEffect(() => {
+        console.log(12212)
         getInfo()
     }, []);
 
@@ -45,9 +45,9 @@ export default function Home({Component, pageProps}) {
                             <div className="profile-block h-100 p-3">
                                 <div className="d-flex justify-content-between pb-2 border-bottom border-color mb-3">
                                     <div className="tag-item">
-                                        <div className="icon me-2 text-highline"><i className="fas fa-user-circle"></i></div>{info.userName}
+                                        <div className="icon me-2 text-highline"><FontAwesomeIcon className="" icon={faUserCircle}/></div>{info.userName}
                                     </div>
-                                    <div className="btn btn-setting"><i className="fa-solid fa-gear"></i></div>
+                                    <div className="btn btn-setting"><FontAwesomeIcon className="" icon={faGear}/></div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-4">Nickname :</div>
@@ -63,7 +63,15 @@ export default function Home({Component, pageProps}) {
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-4">Status :</div>
-                                    <div className="col-8"><span className="me-3">{info.status}</span><i className={info.status === 'ACTIVE' ? "fas fa-check-circle text-success" : "fas fa-lock"} ></i></div>
+                                    <div className="col-8"><span className="me-3">{info.status}</span>
+                                        {
+                                            info.status === 'ACTIVE' ? (
+                                                <FontAwesomeIcon className="" icon={faCheckCircle}/>
+                                            ) : (
+                                                <FontAwesomeIcon className="" icon={faLock}/>
+                                            )
+                                        }
+                                    </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-4">Phone :</div>
@@ -82,13 +90,17 @@ export default function Home({Component, pageProps}) {
                                 <div className="text-light mb-3">Total Agents</div>
                                 <div className="d-flex justify-content-between">
                                     <div className="d-flex align-items-center">
-                                        <div className="icon bg-success me-2"><i className="fas fa-check"></i></div>{info.totalAgentActive}
+                                        <div className="icon bg-success me-2">
+                                            <FontAwesomeIcon className="" icon={faCheck}/>
+                                        </div>{info.totalAgentActive}
                                     </div>
                                     {/*<div className="d-flex align-items-center">*/}
                                     {/*    <div className="icon me-2"><i className="fas fa-link"></i></div>000*/}
                                     {/*</div>*/}
                                     <div className="d-flex align-items-center">
-                                        <div className="icon me-2 bg-danger"><i className="fas fa-lock"></i></div>{info.totalAgentLock}
+                                        <div className="icon me-2 bg-danger">
+                                            <FontAwesomeIcon className="" icon={faLock}/>
+                                        </div>{info.totalAgentLock}
                                     </div>
                                 </div>
                             </div>

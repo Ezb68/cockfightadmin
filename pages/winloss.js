@@ -5,6 +5,8 @@ import {useStoreState} from "@/store/account";
 import moment from "moment";
 import {money} from "@/utills/filters";
 import {useNotify} from "@/utills/useNotify";
+import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Winloss({ Component, pageProps }) {
     const [startDate, setStartDate] = useState(new Date());
@@ -121,14 +123,14 @@ export default function Winloss({ Component, pageProps }) {
                         <table className="table table-bordered text-center">
                             <thead className="align-middle">
                                 <tr>
-                                    <th rowspan="2">User ID</th>
-                                    <th rowspan="2">Currency</th>
-                                    <th rowspan="2">Bet Count</th>
-                                    <th rowspan="2">Total Bet</th>
-                                    <th rowspan="2">Valid bet</th>
+                                    <th rowSpan="2">User ID</th>
+                                    <th rowSpan="2">Currency</th>
+                                    <th rowSpan="2">Bet Count</th>
+                                    <th rowSpan="2">Total Bet</th>
+                                    <th rowSpan="2">Valid bet</th>
                                     <th>Agent</th>
-                                    <th colspan="3">Master Agent</th>
-                                    <th rowspan="2">Company</th>
+                                    <th colSpan="3">Master Agent</th>
+                                    <th rowSpan="2">Company</th>
                                 </tr>
                                 <tr>
                                     <td>P/L</td>
@@ -194,16 +196,14 @@ export default function Winloss({ Component, pageProps }) {
                         <div className="btn-group mx-auto" role="group" aria-label="First group">
                             {
                                 page > 1 && page <= reports?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}><i
-                                        className="fas fa-caret-left"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page-1)}><FontAwesomeIcon className="" icon={faCaretLeft}/></button>
                                 ) : ''
                             }
             
                             <button className="btn btn-danger" type="button">{page}</button>
                             {
                                 page >= 1 && page < reports?.totalPage ? (
-                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}><i
-                                        className="fas fa-caret-right"></i></button>
+                                    <button className="btn btn-light" type="button" onClick={() => setPage(page+1)}><FontAwesomeIcon className="" icon={faCaretRight}/></button>
                                 ) : ''
                             }
         
